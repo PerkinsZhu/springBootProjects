@@ -1,0 +1,37 @@
+server:
+  port: 8000   #  配置启动端口号
+
+mybatis:
+#  config-location: classpath:mybatis/mybatis.cfg.xml    #  mybatis主配置文件所在路径
+  type-aliases-package: com.perkins.beans   #  定义所有操作类的别名所在包
+  mapper-locations:                                     #  所有的mapper映射文件
+#     classpath:com/perkins/mapper/*.xml
+     classpath:mybatis/mapper/*.xml
+#  model:
+#    pack: com.pserkins.beans
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource  #  配置当前要使用的数据源的操作类型
+    driver-class-name: com.mysql.jdbc.Driver    #  配置mysql的驱动程序类
+    url: jdbc:mysql://localhost:3308/mybatis?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC         #  数据库连接地址
+    username: mybatis                                 #  数据库用户名
+    password: mybatis                                 #  数据库密码
+    filters: stat,wall,log4j                      #  配置druid过滤器，开启监控
+    dbcp2:                                        #  进行数据库连接池的配置
+      min-idle: 5                                 #  数据库连接池的最小维持连接数
+      initial-size: 5                             #  初始化提供的连接数
+      max-total: 5                                #  最大连接数
+      max-wait-millis: 200                        #  等待连接获取的最大超时时间
+  jpa:
+      database: MySQL
+      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+
+pagehelper:                       #pagehelper分页插件
+    helperDialect: mysql          #设置数据库方言
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
