@@ -35,3 +35,10 @@ pagehelper:                       #pagehelper分页插件
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
+
+druid:
+  allow: #允许登陆的IP地址
+    ip: 127.0.0.1
+  login: #登陆的账户密码
+    user_name: root
+    password: root
