@@ -5,6 +5,7 @@ import com.perkins.beans.Person;
 import com.perkins.beans.User;
 import com.perkins.repo.PersonRepository;
 import com.perkins.service.PersonService;
+import com.perkins.service.PersonServiceScala;
 import com.perkins.service.UserService;
 import com.perkins.service.UserServiceDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class UserController {
     @Autowired
     PersonService personService;
 
+    @Autowired
+    PersonServiceScala personServiceScala;
+
     //显示用户
     @RequestMapping("list")
     public List<User> index() throws Exception {
@@ -40,6 +44,11 @@ public class UserController {
     @RequestMapping("listPerson")
     public List<Person> listPerson() {
         return personService.listPerson();
+    }
+
+    @RequestMapping("scalaListPerson")
+    public List<Person> scalaListPerson() {
+        return personServiceScala.listPerson();
     }
 
     //删除用户
