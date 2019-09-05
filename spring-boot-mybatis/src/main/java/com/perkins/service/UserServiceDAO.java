@@ -2,6 +2,7 @@ package com.perkins.service;
 
 import com.perkins.beans.User;
 import com.perkins.mapper.UserDao;
+import com.perkins.mapper2.UserDao2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,9 @@ import java.util.List;
 public class UserServiceDAO {
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private UserDao2 userDao2;
 
 
     /**
@@ -26,6 +30,12 @@ public class UserServiceDAO {
      */
     public List<User> selectAllUser() {
         return userDao.findAllUser();
+//        return userDao2.findAllUser();
+    }
+
+    public List<User> selectAllUserWithDS2() {
+//        return userDao.findAllUser();
+        return userDao2.findAllUser();
     }
 
     /**

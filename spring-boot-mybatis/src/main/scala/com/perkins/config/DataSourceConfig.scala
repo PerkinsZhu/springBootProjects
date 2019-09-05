@@ -5,25 +5,24 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.jdbc.DataSourceBuilder
 import org.springframework.context.annotation.{Bean, Configuration, Primary}
-import org.springframework.boot.jdbc.DataSourceBuilder
 
 @Configuration
 class DataSourceConfig {
 
-/*
-  @Bean
-  @Qualifier(value = "myagenDataSource") //spring装配bean的唯一标识
-  @ConfigurationProperties(prefix = "spring.datasource") //application.properties配置文件中该数据源的配置前缀
-  def myagenDataSource(): DataSource = {
-    return DataSourceBuilder.create.build
-  }
-*/
+  /*
+    @Bean
+    @Qualifier(value = "myagenDataSource") //spring装配bean的唯一标识
+    @ConfigurationProperties(prefix = "spring.datasource") //application.properties配置文件中该数据源的配置前缀
+    def myagenDataSource(): DataSource = {
+      return DataSourceBuilder.create.build
+    }
+  */
 
 /*
   @Primary //配置该数据源为主数据源
   @Bean
   @Qualifier(value = "orderDiscountDataSource")
-  @ConfigurationProperties(prefix = "ds1.spring.datasource")
+  @ConfigurationProperties(prefix = "spring.datasource")
   def orderDiscountDataSource(): DataSource = {
     return DataSourceBuilder.create.build
   }*/

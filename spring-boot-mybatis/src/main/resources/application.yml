@@ -11,18 +11,26 @@ mybatis:
 #    pack: com.pserkins.beans
 
 spring:
+  profiles:
+      ##此处引入配置其他数据源配置文件
+      include: dev-datasource
+  aop:
+      proxy-target-class: true
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource  #  配置当前要使用的数据源的操作类型
-    driver-class-name: com.mysql.jdbc.Driver    #  配置mysql的驱动程序类
-    url: jdbc:mysql://localhost:3308/mybatis?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC         #  数据库连接地址
-    username: mybatis                                 #  数据库用户名
-    password: mybatis                                 #  数据库密码
-    filters: stat,wall,log4j                      #  配置druid过滤器，开启监控
-    dbcp2:                                        #  进行数据库连接池的配置
-      min-idle: 5                                 #  数据库连接池的最小维持连接数
-      initial-size: 5                             #  初始化提供的连接数
-      max-total: 5                                #  最大连接数
-      max-wait-millis: 200                        #  等待连接获取的最大超时时间
+    db1:
+      type: com.alibaba.druid.pool.DruidDataSource  #  配置当前要使用的数据源的操作类型
+      driver-class-name: com.mysql.jdbc.Driver    #  配置mysql的驱动程序类
+      jdbc-url: jdbc:mysql://localhost:3308/mybatis?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC         #  数据库连接地址
+      username: mybatis                                 #  数据库用户名
+      password: mybatis                                 #  数据库密码
+      filters: stat,wall,log4j                      #  配置druid过滤器，开启监控
+    db2:
+      type: com.alibaba.druid.pool.DruidDataSource  #  配置当前要使用的数据源的操作类型
+      driver-class-name: com.mysql.jdbc.Driver    #  配置mysql的驱动程序类
+      jdbc-url: jdbc:mysql://localhost:3308/mybatis2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC         #  数据库连接地址
+      username: mybatis                                 #  数据库用户名
+      password: mybatis                                 #  数据库密码
+      filters: stat,wall,log4j                      #  配置druid过滤器，开启监控
   jpa:
       database: MySQL
       database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

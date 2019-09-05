@@ -36,9 +36,16 @@ public class UserController {
     //显示用户
     @RequestMapping("list")
     public List<User> index() throws Exception {
-        return userService.getUser();
+//        return userService.getUser();
 //       通过接口方式进行查询
-//        return userServiceDAO.selectAllUser();
+        return userServiceDAO.selectAllUser();
+    }
+
+    @RequestMapping("list2")
+    public List<User> list2() throws Exception {
+//        return userService.getUser();
+//       通过接口方式进行查询
+        return userServiceDAO.selectAllUserWithDS2();
     }
 
     @RequestMapping("listPerson")
