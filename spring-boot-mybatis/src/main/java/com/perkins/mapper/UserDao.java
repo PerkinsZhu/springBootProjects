@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+//这里可以使用注释的方式表明该接口是一个Mapper
+//也可以在启动主类中通过 @MapperScan(basePackages = "com.perkins.mapper")的方式来自动扫描这里的Mapper,就可以取消 @Mapper注解
 @Mapper
 public interface UserDao {
     /**

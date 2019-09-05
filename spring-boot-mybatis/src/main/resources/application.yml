@@ -2,11 +2,11 @@ server:
   port: 8000   #  配置启动端口号
 
 mybatis:
-#  config-location: classpath:mybatis/mybatis.cfg.xml    #  mybatis主配置文件所在路径
+  config-location: classpath:mybatis/mybatis.cfg.xml    #  mybatis主配置文件所在路径
   type-aliases-package: com.perkins.beans   #  定义所有操作类的别名所在包
-  mapper-locations:                                     #  所有的mapper映射文件
+  mapper-locations: classpath:mybatis/mapper/*.xml #  所有的mapper映射文件
 #     classpath:com/perkins/mapper/*.xml
-     classpath:mybatis/mapper/*.xml
+
 #  model:
 #    pack: com.pserkins.beans
 

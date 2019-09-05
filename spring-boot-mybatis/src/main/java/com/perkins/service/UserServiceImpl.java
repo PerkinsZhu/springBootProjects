@@ -25,6 +25,6 @@ public class UserServiceImpl implements UserService {
     //新增用户
     @Override
     public void addUser(User user) throws Exception {
-//        userMapper.addUser(user);
+        userMapper.addUser(user);
     }
 }

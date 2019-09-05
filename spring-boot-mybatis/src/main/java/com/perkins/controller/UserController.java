@@ -27,9 +27,9 @@ public class UserController {
     //显示用户
     @RequestMapping("list")
     public List<User> index() throws Exception {
-//        return userService.getUser();
+        return userService.getUser();
 //       通过接口方式进行查询
-        return userServiceDAO.selectAllUser();
+//        return userServiceDAO.selectAllUser();
     }
 
     //删除用户
