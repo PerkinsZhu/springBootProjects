@@ -4,6 +4,7 @@ package com.perkins.controller;
 import com.perkins.beans.Person;
 import com.perkins.beans.User;
 import com.perkins.repo.PersonRepository;
+import com.perkins.service.PersonService;
 import com.perkins.service.UserService;
 import com.perkins.service.UserServiceDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,21 @@ public class UserController {
     @Autowired
     private UserServiceDAO userServiceDAO;
 
+
+    @Autowired
+    PersonService personService;
+
     //显示用户
     @RequestMapping("list")
     public List<User> index() throws Exception {
         return userService.getUser();
 //       通过接口方式进行查询
 //        return userServiceDAO.selectAllUser();
+    }
+
+    @RequestMapping("listPerson")
+    public List<Person> listPerson() {
+        return personService.listPerson();
     }
 
     //删除用户
