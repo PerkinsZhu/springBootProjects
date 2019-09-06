@@ -31,6 +31,20 @@ spring:
       username: mybatis                                 #  数据库用户名
       password: mybatis                                 #  数据库密码
       filters: stat,wall,log4j                      #  配置druid过滤器，开启监控
+    db3:
+      type: com.alibaba.druid.pool.DruidDataSource  #  配置当前要使用的数据源的操作类型
+      driver-class-name: com.mysql.jdbc.Driver    #  配置mysql的驱动程序类
+      jdbc-url: jdbc:mysql://localhost:3308/mybatis3?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC         #  数据库连接地址
+      username: mybatis                                 #  数据库用户名
+      password: mybatis                                 #  数据库密码
+      filters: stat,wall,log4j                      #  配置druid过滤器，开启监控
+    db4:
+      type: com.alibaba.druid.pool.DruidDataSource  #  配置当前要使用的数据源的操作类型
+      driver-class-name: com.mysql.jdbc.Driver    #  配置mysql的驱动程序类
+      jdbc-url: jdbc:mysql://localhost:3308/mybatis4?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC         #  数据库连接地址
+      username: mybatis                                 #  数据库用户名
+      password: mybatis                                 #  数据库密码
+      filters: stat,wall,log4j                      #  配置druid过滤器，开启监控
   jpa:
       database: MySQL
       database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

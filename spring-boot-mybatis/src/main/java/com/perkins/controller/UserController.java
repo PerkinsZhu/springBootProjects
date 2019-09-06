@@ -1,6 +1,8 @@
 package com.perkins.controller;
 
 
+import com.perkins.aop.DataSource;
+import com.perkins.aop.DynamicDataSource;
 import com.perkins.beans.Person;
 import com.perkins.beans.User;
 import com.perkins.repo.PersonRepository;
@@ -33,6 +35,9 @@ public class UserController {
     @Autowired
     PersonServiceScala personServiceScala;
 
+
+    @Autowired
+    DynamicDataSource dynamicDataSource;
     //显示用户
     @RequestMapping("list")
     public List<User> index() throws Exception {
@@ -45,7 +50,17 @@ public class UserController {
     public List<User> list2() throws Exception {
 //        return userService.getUser();
 //       通过接口方式进行查询
+
         return userServiceDAO.selectAllUserWithDS2();
+    }
+
+//    @DataSource(value="master")
+    @DataSource(value="slave")
+    @RequestMapping("list3")
+    public List<User> list3() throws Exception {
+//        return userService.getUser();
+//       通过接口方式进行查询
+        return userServiceDAO.selectAllUserWithDS3();
     }
 
     @RequestMapping("listPerson")

@@ -31,11 +31,13 @@ public class BaseDataSourceConfig {
         return DataSourceBuilder.create().build();
     }
 
+/*
     @Bean(name = "transactionManager")
     @Primary
     public DataSourceTransactionManager setTransactionManager(@Qualifier("baseDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
+*/
 
     @Bean(name = "baseSqlSessionFactory")
     @Primary
