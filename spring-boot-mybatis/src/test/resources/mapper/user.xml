@@ -8,7 +8,7 @@
     <delete id="deleteUser" parameterType="Integer">
         delete from user where id =#{id}
     </delete>
-    <insert id="addUser" parameterType="com.perkins.beans.User" useGeneratedKeys="true" keyProperty="id">
-        insert into user(name,age)values(#{username},#{age})
+    <insert id="addUser" parameterType="com.perkins.beans.User">
+        insert into user(id,username,age)values(#{id},#{username},#{age})
     </insert>
 </mapper>

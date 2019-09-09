@@ -12,24 +12,12 @@
         <typeAlias alias="LinkedList" type="java.util.LinkedList"/>
     </typeAliases>
     <environments default="development">
-        <environment id="db1">
-            <transactionManager type="JDBC">
-                <property name="closeConnection" value="false"/>
-            </transactionManager>
-            <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url"
-                          value="jdbc:mysql://localhost:3308/mybatis?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
-                <property name="username" value="mybatis"/>
-                <property name="password" value="mybatis"/>
-            </dataSource>
-        </environment>
-        <environment id="db2">
+        <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <property name="url"
-                          value="jdbc:mysql://localhost:3308/mybatis2?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
+                          value="jdbc:mysql://localhost:3308/mybatis?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
                 <property name="username" value="mybatis"/>
                 <property name="password" value="mybatis"/>
             </dataSource>
