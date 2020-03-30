@@ -1,0 +1,53 @@
+# project logs
+logs/
+out/
+
+
+# jrebel
+rebel.xml
+
+### STS ###
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+# maven ignore
+target/
+*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+
+# node_modules
+node_modules
+
+
+*.versionsBackup
+.mvn
+mvnw
+mvnw.cmd
