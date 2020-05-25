@@ -1,0 +1,10 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: base
+        uri: http://www.ityouknow.com
+        predicates:
+        - Path=/spring-cloud

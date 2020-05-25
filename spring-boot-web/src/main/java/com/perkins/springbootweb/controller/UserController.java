@@ -30,5 +30,8 @@ public class UserController extends BaseController {
         return new User("ok");
     }
 
-
+    @RequestMapping("/jump")
+    public String jump() {
+        return "new.html";
+    }
 }
