@@ -5,13 +5,12 @@ import io.vavr.collection.List;
 import io.vavr.collection.Stream;
 import io.vavr.control.Try;
 import lombok.extern.java.Log;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.junit.Test;
 import org.omg.SendingContext.RunTime;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.UnaryOperator;
 
 import static io.vavr.API.*;
 import static io.vavr.Patterns.$Failure;
@@ -97,4 +96,42 @@ public class VavrSimpleTest {
         print(s);
         Try _try = divide(1, 2);
     }
+
+    @Test
+    public void test() {
+        /*java.util.List<String> otherList = new ArrayList<>();
+        java.util.List<String> list = Collections.unmodifiableList(otherList);
+        *//**
+         * 这里会抛出 UnsupportedOperationException
+         *  Collections.unmodifiableListN 返回的是
+         *  java.util.Collections.UnmodifiableList#UnmodifiableList
+         *//*
+        list.add("a");*/
+        //指定元素数量
+        List list1 =List.of(1,2,3,4);
+        //循环10次填充1
+        List list2 =List.fill(10,1);
+        //填充1-> 100 的数据
+        List list3 = List.range(1,100);
+        //指定步长为20
+        List list4 = List.rangeBy(1,100,20);
+        // vavr List 转换为 java list
+        java.util.List<String> list5 = list4.asJava();
+//        list5.add("A"); //不可变list，无法添加元素
+        //转变为可变list,
+        java.util.List<String> list6 = list4.asJavaMutable();
+        list6.add("A");
+        showList(list1);
+        showList(list2);
+        showList(list3);
+        showList(list4);
+
+    }
+
+    private void showList(List list) {
+//        print(StringUtils.join(list.asJava(), '、'));
+        list.forEach(i ->{print(i);});
+    }
+
+
 }
