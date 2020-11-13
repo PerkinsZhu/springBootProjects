@@ -99,9 +99,6 @@ public class UserController {
     public String addPerson() throws Exception {
         System.out.printf("----addd-----");
         Person person = new Person();
-        person.setEmail("asdf@ddd.com");
-        person.setPassword("asdf");
-        person.setUsername("name--" + System.currentTimeMillis());
         // 通过 jpa 的方式实现数据库操作
         personRepository.save(person);
         personRepository.findAll().forEach(person1 -> {
