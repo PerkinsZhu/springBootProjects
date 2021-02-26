@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service
 
 @Service
 class PersonServiceScala {
-  @Autowired
+/*  @Autowired
   val personRepository: PersonRepository = null;
 
   def listPerson(): java.util.List[Person] = {
-    println(s"personRepository = ${personRepository}")
-    return personRepository.findAll()
-  }
+   /* println(s"personRepository = ${personRepository}")
+    return personRepository.findAll()*/
+    personRepository.findAll()
+  }*/
 }
