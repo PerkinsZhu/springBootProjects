@@ -51,3 +51,8 @@ node_modules
 .mvn
 mvnw
 mvnw.cmd
+
+*/.gradle
+wrapper
+gradlew
+gradlew.bat
