@@ -56,3 +56,6 @@ mvnw.cmd
 wrapper
 gradlew
 gradlew.bat
+
+classes
+build

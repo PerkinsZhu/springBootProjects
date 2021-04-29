@@ -201,6 +201,19 @@
             <version>3.3.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.vip.saturn/saturn-job-api -->
+        <dependency>
+            <groupId>com.vip.saturn</groupId>
+            <artifactId>saturn-job-api</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.vip.saturn/saturn-core -->
+        <dependency>
+            <groupId>com.vip.saturn</groupId>
+            <artifactId>saturn-core</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
     </dependencies>
 	<build>
 		<plugins>
