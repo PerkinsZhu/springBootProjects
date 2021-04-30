@@ -22,6 +22,7 @@ public class ConsumerGroup {
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000");
         props.put("session.timeout.ms", "30000");
+        props.put("fetch.max.bytes", "2");
         props.put("key.deserializer", Class.forName("org.apache.kafka.common.serialization.StringDeserializer"));
         props.put("value.deserializer", Class.forName("org.apache.kafka.common.serialization.StringDeserializer"));
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);

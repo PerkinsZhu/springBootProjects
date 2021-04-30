@@ -29,6 +29,7 @@ dependencies {
 
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+    implementation group: 'org.apache.rocketmq', name: 'rocketmq-client', version: '4.8.0'
 
 }
 
