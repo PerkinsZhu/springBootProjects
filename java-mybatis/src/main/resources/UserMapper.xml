@@ -11,10 +11,19 @@
     resultType：返回值类型
     #{id}：从传递过来的参数中取出id值
     public Employee getEmpById(Integer id);
+    flushCache =true select 之前清空缓存(包括一级和二级缓存)
+    useCache 是否使用二级缓存
      -->
-    <select id="getById" resultType="com.perkin.entity.User">
+    <select id="getById" resultType="com.perkin.entity.User" flushCache="true" useCache="true">
         SELECT *
-        from user;
+        from user
+        WHERE id = #{id};
+    </select>
+    <select id="getByIdAndName" resultType="com.perkin.entity.User" flushCache="true" useCache="true">
+        SELECT *
+        from user
+        WHERE id = ${id}
+          and name = #{name};
     </select>
     <update id="updateById">
         update user
