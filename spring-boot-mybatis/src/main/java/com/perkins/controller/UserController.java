@@ -1,6 +1,7 @@
 package com.perkins.controller;
 
 
+import cn.hutool.core.util.RandomUtil;
 import com.perkins.aop.DataSource;
 import com.perkins.aop.DynamicDataSource;
 import com.perkins.beans.Person;
@@ -10,13 +11,21 @@ import com.perkins.service.PersonService;
 import com.perkins.service.PersonServiceScala;
 import com.perkins.service.UserService;
 import com.perkins.service.UserServiceDAO;
+import com.perkins.utils.FileToBase64;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+@Slf4j
 @RestController
 public class UserController {
 
@@ -105,5 +114,25 @@ public class UserController {
             System.out.printf(person.toString());
         });
         return "增加用户";
+    }
+
+    @RequestMapping("download")
+    public String downloadFile(){
+        File file = FileUtils.getFile(System.nanoTime() + RandomUtil.randomChar() + ".xlsx");
+        try (OutputStream outputStream = new FileOutputStream(file)) {
+            //TODO把文件数据写入file
+            outputStream.write("helloworld".getBytes(StandardCharsets.UTF_8));
+            outputStream.flush();
+            //把file二进制转base64 String
+            String baseStr = FileToBase64.encodeBase64File(file.getAbsolutePath());
+            return baseStr;
+        } catch (Exception e) {
+            log.error("数据下载异常", e);
+        } finally {
+            if (file.exists()) {
+                file.delete();
+            }
+        }
+        return "";
     }
 }
