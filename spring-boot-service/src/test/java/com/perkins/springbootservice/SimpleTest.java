@@ -1,5 +1,6 @@
 package com.perkins.springbootservice;
 
+import com.google.common.util.concurrent.AtomicDouble;
 import io.vavr.*;
 import io.vavr.collection.List;
 import io.vavr.concurrent.Future;
@@ -8,6 +9,7 @@ import io.vavr.control.Try;
 import lombok.val;
 import net.bytebuddy.implementation.bytecode.constant.IntegerConstant;
 import org.junit.Test;
+
 import static io.vavr.Patterns.*;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static io.vavr.Patterns.*;
@@ -180,16 +183,19 @@ public class SimpleTest {
                 }))
         );
         A obj = new A();
-        Number plusOne = Match(obj).of(
-                Case($(instanceOf(Integer.class)), i -> i + 1), //根据值类型进行匹配
-                Case($(instanceOf(Double.class)), d -> d + 1),
-                Case($(), o -> { throw new NumberFormatException(); })
-        );
+/*        Match(obj).of(
+                Case($(instanceOf(Integer.class)), m -> new AtomicInteger(m)), //根据值类型进行匹配
+                Case($(instanceOf(Double.class)), d -> new AtomicDouble(d)),
+                Case($(), o -> {
+//                    throw new NumberFormatException();
+                    return  new AtomicInteger(1);
+                })
+        );*/
 
-        Tuple2 tuple2 = Tuple("a",2);
-        Try<Tuple2<String,Integer>> _try = Try.success(tuple2);
+        Tuple2 tuple2 = Tuple("a", 2);
+        Try<Tuple2<String, Integer>> _try = Try.success(tuple2);
         Match(_try).of(
-                Case($Success($Tuple2($("a"), $())), tuple22 ->{}),
+                Case($Success($Tuple2($("a"), $())), tuple22 -> 234),
                 Case($Failure($(instanceOf(Error.class))), error -> error.fillInStackTrace())
         );
 
@@ -200,6 +206,13 @@ public class SimpleTest {
         );
     }
 
-}
+    public void displayHelp() {
+        System.out.println("displayHelp");
+    }
+
+    public void displayVersion() {
+        System.out.println("displayVersion");
+    }
 
 }
+
