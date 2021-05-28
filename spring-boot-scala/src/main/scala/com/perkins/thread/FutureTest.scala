@@ -25,4 +25,8 @@ class FutureTest {
     Await.ready(future, Duration.Inf)
   }
 
+  @Test
+  def testAkkaStream(): Unit ={
+
+  }
 }

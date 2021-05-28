@@ -1,7 +1,7 @@
 buildscript {
 //    buildscript中的声明是gradle脚本自身需要使用的资源。可以声明的资源包括依赖项、第三方插件、maven仓库地址等。
     ext {
-        scalaVersion = '2.12.13'
+        scalaVersion = '2.12.2'
     }
 
     repositories {
@@ -32,6 +32,10 @@ repositories {
     mavenCentral()
 }
 
+def versions = [
+        ScalaBinary: "2.12"
+]
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation 'junit:junit:4.13.1'
@@ -47,6 +51,12 @@ dependencies {
 
     // https://mvnrepository.com/artifact/junit/junit
     compile group: 'junit', name: 'junit', version: '4.13.2'
+
+//     akka
+    compile platform("com.typesafe.akka:akka-bom_${versions.ScalaBinary}:2.6.14")
+    compile "com.typesafe.akka:akka-stream_${versions.ScalaBinary}"
+    //scalaz 注意 7.3.3只能用2.12的scala,否则报找不到 scala.Serializable
+    compile 'org.scalaz:scalaz-core_2.12:7.3.3'
 
 }
 
