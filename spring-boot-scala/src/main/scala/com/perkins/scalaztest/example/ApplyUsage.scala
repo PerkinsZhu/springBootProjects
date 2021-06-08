@@ -1,4 +1,4 @@
-package com.perkins.scalaz.example
+package com.perkins.scalaztest.example
 
 /**
  *

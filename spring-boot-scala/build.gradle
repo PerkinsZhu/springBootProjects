@@ -5,8 +5,9 @@ buildscript {
     }
 
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
         jcenter()
         maven {
             url "https://oss.sonatype.org/content/repositories/snapshots/"
@@ -63,19 +64,25 @@ dependencies {
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala', 'src/main/java', 'src/main/kotlin']
+            srcDirs = ['src/main/scala']
+        }
+        kotlin {
+            srcDirs = ['src/main/kotlin']
         }
         java {
-            srcDirs = []
+            srcDirs = ['src/main/java']
         }
     }
 
     test {
         scala {
-            srcDirs = ['src/test/scala', 'src/test/java', 'src/test/kotlin']
+            srcDirs = ['src/test/scala']
         }
         java {
-            srcDirs = []
+            srcDirs = ['src/test/java']
+        }
+        kotlin {
+            srcDirs = ['src/test/kotlin']
         }
     }
 }

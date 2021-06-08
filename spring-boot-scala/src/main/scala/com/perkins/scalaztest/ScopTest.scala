@@ -1,4 +1,4 @@
-package com.perkins.scalaz
+package com.perkins.scalaztest
 
 import org.junit.Test
 
