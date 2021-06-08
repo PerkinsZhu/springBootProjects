@@ -3,6 +3,9 @@ package com.perkins
 import com.perkins.NonZero.create
 import com.perkins.NoneZeroOps.toNoneZeroOps
 import org.junit.Test
+import org.scalatest.Matchers.===
+import scalaz.Functor
+import scalaz.Scalaz.{ToEqualOps, listInstance}
 
 /**
  *
@@ -31,7 +34,7 @@ object NonZero {
   implicit val stringNZInstance: NonZero[String] = NonZero.create {
     case "" => false
     case _ => true
-  }                                                 //> stringNZInstance  : scalaz.ex5.NonZero[String] = scalaz.ex5$NonZero$$anon$1@
+  } //> stringNZInstance  : scalaz.ex5.NonZero[String] = scalaz.ex5$NonZero$$anon$1@
   //| 1c655221
   implicit val booleanNZInstance: NonZero[Boolean] = NonZero.create { b => b }
   //> booleanNZInstance  : scalaz.ex5.NonZero[Boolean] = scalaz.ex5$NonZero$$anon$
@@ -58,7 +61,7 @@ class test {
     //使用的自定义判断逻辑
     val b = NonZero.create((i: Int) => i == 10);
     println(b.nonZero(23))
-
+    //SD
     //使用的默认判断逻辑 com.perkins.NonZero.intNZInstance
     a(23)
     println(23.isNoneZero)
@@ -72,4 +75,10 @@ class test {
     println("====" + nonZero.isNoneZero)
   }
 
+  @Test
+  def testMap(): Unit = {
+    Functor[List].map(List(1, 2, 3).map(i => i + 1))(i2 => i2 * 3)
+    List(1, 2, 3).map(((i2: Int) => i2 * 3) compose ((i: Int) => i + 1))
+    List(1, 2, 3).foreach(i => println(i))
+  }
 }

@@ -1,9 +1,10 @@
+import kotlin.Unit
+
 buildscript {
 //    buildscript中的声明是gradle脚本自身需要使用的资源。可以声明的资源包括依赖项、第三方插件、maven仓库地址等。
     ext {
         scalaVersion = '2.12.2'
     }
-
     repositories {
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://maven.aliyun.com/repository/public/' }
@@ -87,6 +88,95 @@ sourceSets {
     }
 }
 
+
 test {
     useJUnitPlatform()
+}
+
+task showFile {
+    sourceSets.all { set ->
+        println "${set.name}的文件是 ${set.java.srcDirs}"
+    }
+}
+
+// 定义并配置myTask
+task myTask {
+    println "config myTask"
+}
+
+myTask.doLast {
+    println "after execute myTask"
+}
+
+myTask.doFirst {
+    println "before execute myTask"
+}
+task count {
+    4.times {
+        print(it)
+    }
+}
+task hello {
+
+    List<String> strs = Arrays.asList("aa", "bb");
+    for (String str : strs) {
+        System.out.println(str);
+    }
+    Map<Integer, String> map = new HashMap<>();
+    map.put(1, "a");
+    map.put(3, "b");
+    for (Integer key : map.keySet()) {
+        System.out.println("key:" + key);
+        println 'value:' + map.get(key)
+    }
+    println 'hello world'
+
+}
+task kotlinTask {
+
+}
+
+task hello2 {
+    description 'this is hello2'
+    doLast {
+        println 'hello'
+    }
+}
+
+//会先执行hello2,之后再执行worl方法
+task world(dependsOn: hello2) {
+    doLast {
+        println 'world'
+    }
+}
+
+class RygTask extends DefaultTask {
+    String message = 'This is RygTask'
+
+    // @TaskAction 表示该Task要执行的动作,即在调用该Task时，hello()方法将被执行
+    @TaskAction
+    def hello() {
+        println "Hello world. $message"
+    }
+}
+
+// hello使用了默认的message值
+task helloRygTask(type: RygTask)
+
+// 重新设置了message的值
+task hello1(type: RygTask) {
+    message = "I am an android developer"
+}
+
+task myTask1 {
+    println "execute myTask1"
+}
+
+task myTask2 {
+    println "execute myTask2"
+}
+
+// 定义一个名字为rygTask的task，属于renyugang分组，并且依赖myTask1和myTask2两个task。
+project.task('rygTask', group: "renyugang", description: "我自己的Task", dependsOn: ["myTask1", "myTask2"]).doLast {
+    println "execute rygTask"
 }
