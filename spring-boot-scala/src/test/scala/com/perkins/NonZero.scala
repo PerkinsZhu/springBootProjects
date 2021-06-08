@@ -28,6 +28,19 @@ object NonZero {
     case 0 => false
     case _ => true
   }
+  implicit val stringNZInstance: NonZero[String] = NonZero.create {
+    case "" => false
+    case _ => true
+  }                                                 //> stringNZInstance  : scalaz.ex5.NonZero[String] = scalaz.ex5$NonZero$$anon$1@
+  //| 1c655221
+  implicit val booleanNZInstance: NonZero[Boolean] = NonZero.create { b => b }
+  //> booleanNZInstance  : scalaz.ex5.NonZero[Boolean] = scalaz.ex5$NonZero$$anon$
+  //| 1@6aaa5eb0
+
+  implicit def listNZInstance[A]: NonZero[List[A]] = NonZero.create {
+    case Nil => false
+    case _ => true
+  }
 }
 
 class NoneZeroOps[T](t: T)(implicit nonZero: NonZero[T]) {
@@ -49,6 +62,9 @@ class test {
     //使用的默认判断逻辑 com.perkins.NonZero.intNZInstance
     a(23)
     println(23.isNoneZero)
+    println("23".isNoneZero)
+    println(true.isNoneZero)
+    println(List.empty[Int].isNoneZero)
 
   }
 
