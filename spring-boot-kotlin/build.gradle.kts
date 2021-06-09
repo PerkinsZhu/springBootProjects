@@ -39,9 +39,9 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    implementation(kotlin("org.scala-lang:scala-library:2.12.2"))
-    implementation(kotlin("org.scala-lang:scala-compiler:2.12.2"))
-    implementation(kotlin("org.scala-lang:scala-reflect:2.12.2"))
+    implementation("org.scala-lang:scala-library:2.12.2")
+    implementation("org.scala-lang:scala-compiler:2.12.2")
+    implementation("org.scala-lang:scala-reflect:2.12.2")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
