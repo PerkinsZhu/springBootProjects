@@ -21,8 +21,10 @@ buildscript {
 plugins {
     id 'java'
     id 'scala'
+//    id: "groovy"
     id 'org.jetbrains.kotlin.jvm' version '1.4.32'
 }
+apply plugin: "groovy"
 
 group 'com.perkins'
 version '1.0-SNAPSHOT'
@@ -47,6 +49,11 @@ dependencies {
     compile "org.scala-lang:scala-library:$scalaVersion"
     compile "org.scala-lang:scala-compiler:$scalaVersion"
     compile "org.scala-lang:scala-reflect:$scalaVersion"
+
+    //groovy
+    compile gradleApi()
+    compile localGroovy()
+
 
     // https://mvnrepository.com/artifact/org.scalatest/scalatest
     testCompile group: 'org.scalatest', name: 'scalatest_2.12', version: '3.2.0-SNAP10'
@@ -73,6 +80,9 @@ sourceSets {
         java {
             srcDirs = ['src/main/java']
         }
+        groovy {
+            srcDirs = ['src/main/groovy']
+        }
     }
 
     test {
@@ -84,6 +94,9 @@ sourceSets {
         }
         kotlin {
             srcDirs = ['src/test/kotlin']
+        }
+        groovy {
+            srcDirs = ['src/test/groovy']
         }
     }
 }
