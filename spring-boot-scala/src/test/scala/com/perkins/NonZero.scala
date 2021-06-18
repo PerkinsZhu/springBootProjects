@@ -1,11 +1,11 @@
 package com.perkins
 
-import com.perkins.NonZero.create
+import com.perkins.NonZero.{create, listNZInstance}
 import com.perkins.NoneZeroOps.toNoneZeroOps
 import org.junit.Test
 import org.scalatest.Matchers.===
 import scalaz.Functor
-import scalaz.Scalaz.{ToEqualOps, listInstance}
+import scalaz.Scalaz.{ToEqualOps, function1Comonad, function1Covariant, function2Instance, function3Instance, listInstance}
 
 /**
  *
@@ -81,4 +81,52 @@ class test {
     List(1, 2, 3).map(((i2: Int) => i2 * 3) compose ((i: Int) => i + 1))
     List(1, 2, 3).foreach(i => println(i))
   }
+
+  @Test
+  def factorTest(): Unit = {
+    implicit val item3Functor = new Functor[Item3] {
+      def map[A, B](ia: Item3[A])(f: A => B): Item3[B] = Item3(f(ia.i1), f(ia.i2), f(ia.i3))
+    }
+
+    //| un$main$1$$anon$1@5e265ba4
+    val F = Functor[Item3] //> F  : scalaz.Functor[scalaz.functor.Item3] = scalaz.functor$$anonfun$main$1$$
+    //| anon$1@5e265ba4
+    val a = F.map(Item3("Morning", "Noon", "Night"))(_.length) //> res0: scalaz.functor.Item3[Int] = Item3(7,4,5)
+    val b = F.apply(Item3("Morning", "Noon", "Night"))(_.length) //> res1: scalaz.functor.Item3[Int] = Item3(7,4,5)
+    val c = F(Item3("Morning", "Noon", "Night"))(_.length) //> res2: scalaz.functor.Item3[Int] = Item3(7,4,5)
+    val d = F.lift((s: String) => s.length)(Item3("Morning", "Noon", "Night")) //> res3: scalaz.functor.Item3[Int] = Item3(7,4,5)
+    println(a)
+    println(b)
+    println(c)
+    println(d)
+
+    val f = Functor[List] compose Functor[Item3]
+    val aa = f.map(List.apply(Item3(1, 2, 3)))(i => i.toString)
+    println(aa)
+
+    val item3 = Item3("Morning", "Noon", "Night")
+    val bb = f.map(List(item3, item3))(_.length)
+    println(bb)
+
+    //    https://www.cnblogs.com/tiger-xc/p/4840597.html
+    val cc = Functor[({type l[x] = String => x})#l].map((s: String) => s + "!")(_.length)("Hello")
+    println(cc)
+
+    type a = {def close(): Unit}
+    type l[x] = String => x
+    val dd = Functor[({type l[x] = (String, Int) => x})#l]
+      .map((s: String, i: Int) => s.length + i)(_ * 10)("Hello", 5)
+    val ee = Functor[({type l[x] = (String, Int, Boolean) => x})#l]
+      .map((s: String, i: Int, b: Boolean) => s + i.toString + b.toString)(_.toUpperCase)("Hello", 3, true)
+
+    val list = scala.collection.mutable.ListBuffer[{type A= Int =>String}]()
+    list.append((A:Int)=> "asdfasd")
+
+    (1 to 10).toList.map(i => i.toString)
+
+  }
+
 }
+
+
+case class Item3[A](i1: A, i2: A, i3: A)
