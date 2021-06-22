@@ -120,7 +120,6 @@ class test {
       .map((s: String, i: Int, b: Boolean) => s + i.toString + b.toString)(_.toUpperCase)("Hello", 3, true)
 
     val list = scala.collection.mutable.ListBuffer[{type A= Int =>String}]()
-    list.append((A:Int)=> "asdfasd")
 
     (1 to 10).toList.map(i => i.toString)
 
