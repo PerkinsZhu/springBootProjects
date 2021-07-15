@@ -48,12 +48,42 @@ public class App {
         log.info("Client connected ..");
         client.setEventSubscriptions("plain", "all");
 
+//        simpleTest(client);
+        callTest(client);
+
+    }
+
+    private static void callTest(Client client) {
+        EslMessage message = client.sendSyncApiCommand("originate", "user/1010 &park");
+        showMessage(message);
+        EslMessage message2 = client.sendSyncApiCommand("originate", "user/1009 &park");
+        showMessage(message2);
+
+        EslMessage show = client.sendSyncApiCommand("show","channels");
+        showMessage(show);
+
+//        uuid_bridge b1aa8210-c0d3-4fa3-a4c6-ec81c538897f 0ef19345-077e-4fe9-bd8e-e47e1f9d8987
+
+    }
+
+    private static void showMessage(EslMessage message) {
+        StringBuilder header = new StringBuilder();
+        message.getHeaders().forEach((k, v) -> {
+            header.append(k + ": " + v+"\r\n");
+        });
+        log.info("================Headers=========================\r\n{}", header);
+
+        String body = StringUtils.join(message.getBodyLines(), "\r\n");
+        log.info("================Body=========================\r\n{}", body);
+    }
+
+    private static void simpleTest(Client client) {
         //通过外联方式主动向指定的手机号呼叫，并以回显方式接通
-//        EslMessage message = client.sendSyncApiCommand("originate", "user/1010 &echo");
+        EslMessage message = client.sendSyncApiCommand("originate", "user/1010 &echo");
         // 以 park 挂起方式接通，接通后另一方无任何反应
 //        EslMessage message = client.sendSyncApiCommand("originate", "user/1010 &park");
 //      挂起，会播放默认音乐
-        EslMessage message = client.sendSyncApiCommand("originate", "user/1010 &hold");
+//        EslMessage message = client.sendSyncApiCommand("originate", "user/1010 &hold");
         // record  录音
 //        EslMessage message = client.sendSyncApiCommand("originate", "user/1010 &record(D:/tmp/fs/20210629_voice.wav)");
 //        转接给 1009
@@ -63,6 +93,7 @@ public class App {
 
        /* EslMessage response = client.sendSyncApiCommand("sofia status", "");
         log.info("sofia status = [{}]", response.getBodyLines().get(3));
+
 */
     }
 
