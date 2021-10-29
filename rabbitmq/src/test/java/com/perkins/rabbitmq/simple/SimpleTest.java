@@ -58,7 +58,7 @@ public class SimpleTest {
         Channel channel = connection.createChannel();
         return channel;
     }
-// test2w
+// test2w2w34
     public static void main(String[] args) throws IOException, TimeoutException {
         SimpleTest test = new SimpleTest();
         test.testConsumer();
