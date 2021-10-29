@@ -12,26 +12,33 @@ import java.util.concurrent.TimeoutException;
  * @description:
  **/
 public class SimpleTest {
-    private String EXCHANGE_NAME = "directeExchange02";
+    private String EXCHANGE_NAME = "directeExchange04";
 
     @Test
     public void testProdicer() throws IOException, TimeoutException, InterruptedException {
         Channel channel = getChannel();
-
+        channel.confirmSelect();
 
         // 2.为通道声明exchange和exchange的类型
 //        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
-        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
+        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT, true);
         for (int i = 0; i < 100000; i++) {
             String bindKey = "info";
-            if(i % 2 ==0){
+            if (i % 2 == 0) {
                 bindKey = "debug";
             }
 
             String msg = " hello rabbitmq, this is publish/subscribe mode mssage:   " + i;
             // 3.发送消息到指定的exchange,队列指定为空,由exchange根据情况判断需要发送到哪些队列
             channel.basicPublish(EXCHANGE_NAME, bindKey, null, msg.getBytes());
+
             System.out.println("product send a msg: " + msg);
+            if (channel.waitForConfirms()) {
+                System.out.println("发送成功");
+            } else {
+                //发送失败这里可进行消息重新投递的逻辑
+                System.out.println("发送失败");
+            }
             Thread.sleep(500);
         }
 
@@ -61,10 +68,13 @@ public class SimpleTest {
         Channel channel = getChannel();
         // 2.为通道声明exchange以及exchange类型
 //        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
-        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
+        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT, true, false, null);
 
         // 3.创建随机名字的队列
-        String queueName = channel.queueDeclare().getQueue();
+//        String queueName = channel.queueDeclare().getQueue();
+        String queueName = "test_queue_01";
+        channel.queueDeclare(queueName, true, false, false, null);
+
         String bindKey = "debug";
 
         // 4.建立exchange和队列的绑定关系
@@ -80,10 +90,15 @@ public class SimpleTest {
                 // 获取消息内容然后处理
                 String msg = new String(body, "UTF-8");
                 System.out.println("*********** Consumer1" + " get message :[" + msg + "]");
+                // 手动进行ACK
+                channel.basicAck(envelope.getDeliveryTag(), false);
             }
         };
+
+
         // 6.消费消息
-        channel.basicConsume(queueName, true, consumer);
+//        channel.basicConsume(queueName, true, consumer);
+        channel.basicConsume(queueName, false, consumer);
     }
 
 
