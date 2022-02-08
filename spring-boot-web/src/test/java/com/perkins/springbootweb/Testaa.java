@@ -3,8 +3,14 @@ package com.perkins.springbootweb;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.perkins.springbootweb.test.AA;
+import com.perkins.springbootweb.vo.UserVO;
 import org.bson.ByteBuf;
 import org.junit.Test;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -12,6 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * @author ：Perkins Zhu
@@ -109,5 +116,27 @@ public class Testaa {
             bytesRead = inChannel.read(buf);
         }
         aFile.close();
+    }
+
+
+    /**
+     * 手动校验参数，对于需要进行解密的请求，可以进行手动校验
+     */
+    @Test
+    public void check_person_manually() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        UserVO person = new UserVO();
+        person.setName("Man22");
+        person.setAge(19);
+        person.setEmail("SnailClimb");
+        Set<ConstraintViolation<UserVO>> violations = validator.validate(person);
+        //output:
+        //email 格式不正确
+        //name 不能为空
+        //sex 值不在可选范围
+        for (ConstraintViolation<UserVO> constraintViolation : violations) {
+            System.out.println(constraintViolation.getMessage());
+        }
     }
 }
