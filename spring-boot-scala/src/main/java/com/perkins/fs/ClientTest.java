@@ -31,7 +31,7 @@ public class ClientTest
 {
     private final Logger log = LoggerFactory.getLogger( this.getClass() );
 
-    private String host = "172.20.113.213";
+    private String host = "127.0.0.1";
     private int port = 8021;
     private String password = "ClueCon"; 
         
