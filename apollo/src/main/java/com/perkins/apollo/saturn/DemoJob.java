@@ -14,7 +14,8 @@ import com.vip.saturn.job.SaturnJobReturn;
 public class DemoJob extends AbstractSaturnJavaJob {
 
     @Override
-    public SaturnJobReturn handleJavaJob(final String jobName, final Integer shardItem, final String shardParam, final SaturnJobExecutionContext context) {
+    public SaturnJobReturn handleJavaJob(final String jobName, final Integer shardItem,
+                                         final String shardParam, final SaturnJobExecutionContext context) {
         // do what you want here ...
 
         // 返回一个SaturnJobReturn对象，默认返回码是200表示正常的返回
